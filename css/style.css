@@ -1,0 +1,550 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+
+:root {
+  --primary-color: #fceee3;
+  --secondary-color: #fe7eaf;
+  --tertiary-color: #f9f5f2;
+  --accent-color: #f8cb46;
+  --dark-color: #333333;
+  --light-color: #F9F5F2;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+}
+
+body {
+  background-color: var(--primary-color);
+}
+
+/* Navbar Styling */
+.navbar {
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #c22360;
+}
+
+.navbar-brand:hover {
+  color: #c22360;
+  transform: translateY(-2px);
+}
+
+.nav-link {
+  font-weight: 700;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--dark-color) !important;
+  transform: translateY(-2px);
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 50%;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+  width: 80%;
+}
+
+/* Home Section */
+.hero-section {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 60px 0;
+}
+
+.home-description .btn {
+  box-shadow: 4px 4px rgba(0, 0, 0, 1);
+}
+
+.home-description .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 6px 6px rgba(0, 0, 0, 1);
+  transition: all 0.3s ease-in-out;
+}
+
+.home-image {
+  position: relative;
+  width: 300px;
+  height: 350px;
+}
+
+.image-container {
+  position: relative;
+  width: 300px;
+  height: 350px;
+  clip-path: polygon(50% 100%, 100% 74%, 100% 0, 0 0, 0 74%);
+  background-color: #fe91e8;
+  overflow: visible;
+  z-index: 2;
+}
+
+.main-photo {
+  position: absolute;
+  width: 300px;
+  height: 400px;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  clip-path: polygon(50% 100%, 100% 77%, 100% 0, 0 0, 0 77%);
+  background: url("../img/karina.png") center/cover;
+  border-radius: 15px;
+  z-index: 3;
+}
+
+.side-photo {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  left: -40px;
+  top: 40%;
+  transform: translateY(-50%);
+  background: url("../img/mykisah-karina.jpeg") center/cover;
+  background-color: #91a8eb;
+  border-radius: 50%;
+  z-index: 5;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.side-photo:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+.love-animation {
+  position: absolute;
+  left: -60px;
+  top: 50%;
+  width: 40px;
+  height: 50px;
+  z-index: 1;
+}
+
+.heart {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  opacity: 0;
+  animation: loveFloat 3s infinite;
+}
+
+.heart:nth-child(1) {
+  left: 0;
+  animation-delay: 0s;
+  color: #ff69b4;
+}
+
+.heart:nth-child(2) {
+  left: 15px;
+  animation-delay: 1s;
+  color: #ff1493;
+}
+
+.heart:nth-child(3) {
+  left: 30px;
+  animation-delay: 2s;
+  color: #ff69b4;
+}
+
+@keyframes loveFloat {
+  0% {
+    transform: translateY(0) scale(0.8);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-150px) scale(1.2);
+    opacity: 0;
+  }
+}
+
+.heart::before {
+  content: "❤️";
+  font-size: 16px;
+  display: block;
+  animation: heartPulse 0.5s infinite alternate;
+}
+
+@keyframes heartPulse {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+.home-description h6 {
+  color: #6c757d;
+  font-weight: 500;
+}
+
+.home-description h1 {
+  color: #2c3e50;
+  margin: 20px 0;
+}
+
+.home-description h5 {
+  color: #6c757d;
+  line-height: 1.6;
+}
+
+/* What I Do Section */
+.what-i-do-section {
+  min-height: 90vh;
+  position: relative;
+  padding: 60px 0 120px;
+}
+
+.what-i-do-card {
+  background-color: var(--secondary-color);
+  border: 0.2rem solid rgb(0, 0, 0);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 6px 6px rgba(0, 0, 0, 1);
+  transition: transform 0.5s ease-in-out;
+  margin-bottom: 2rem; /* Add gap between cards */
+}
+
+.what-i-do-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 8px 8px rgba(0, 0, 0, 1);
+}
+
+.card-img-top {
+  height: 5rem;
+  width: 5rem;
+  margin: 30px 0 30px 20px;
+}
+
+.card-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.what-i-do-btn {
+  color: var(--light-color);
+}
+
+/* Footer Container */
+.footer-section {
+  height: auto;
+  background-color: var(--light-color);
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.footer-photo-container,
+.footer-photo-container-scnd {
+  position: relative;
+  width: 30vw;
+  min-height: 80vh;
+  overflow: hidden;
+}
+
+.footer-photo-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../img/karina.jpg") center/cover no-repeat;
+  filter: grayscale(1);
+  transition: transform 0.5s ease-in-out, filter 0.5s ease-in-out;
+}
+
+.footer-photo-container-scnd::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../img/karina aespa.jpg") center/cover no-repeat;
+  filter: grayscale(1);
+  transition: transform 0.5s ease-in-out, filter 0.5s ease-in-out;
+}
+
+.footer-photo-container:hover::before,
+.footer-photo-container-scnd:hover::before {
+  filter: grayscale(0);
+  transform: scale(1.05);
+}
+
+/* Description */
+.footer-description {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  transform: translateY(-50%);
+}
+.footer-description h1 {
+    font-size: 3.5rem;
+  color: var(--dark-color);
+  margin-bottom: 1rem;
+}
+.social-links {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  justify-content: center;
+}
+
+.social-links li a {
+  text-decoration: none;
+  color: var(--dark-color);
+  font-weight: 700;
+  transition: color 0.3s ease;
+}
+
+.social-links li a:hover {
+  color: var(--secondary-color);
+  transform: translateY(-2px);
+}
+
+.social-links li i {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 0.5rem;
+}
+
+/* Footer text */
+.footer-text {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  text-align: center;
+  color: var(--dark-color);
+  font-size: 0.9rem;
+  margin-left: 50%;
+  padding: 1rem 0;
+  font-weight: 700;
+}
+
+/* Target the scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+/* Track (background) */
+::-webkit-scrollbar-track {
+  background: var(--primary-color); 
+  border-radius: 10px;
+}
+
+/* Thumb (the draggable part) */
+::-webkit-scrollbar-thumb {
+  background: var(--secondary-color); 
+  border: 2px solid var(--accent-color);
+  border-radius: 10px;
+}
+
+/* Thumb on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+/* Tablet/Medium Screens */
+@media (max-width: 992px) {
+  /* Hero section adjustments */
+  .hero-section {
+    min-height: 100vh;
+    padding: 100px 0 60px; /* Add top padding to avoid navbar collision */
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+  }
+  
+  .home-image {
+    order: -1; /* Move image to top on mobile */
+    margin-bottom: 2rem;
+  }
+  
+  /* Card gaps for medium screens */
+  .what-i-do-card {
+    margin-bottom: 2.5rem;
+  }
+  
+  .what-i-do-section {
+    padding: 80px 0 140px;
+  }
+  
+  /* Footer adjustments */
+  .footer-description h1 {
+    font-size: 3rem;
+  }
+}
+
+/* Mobile Screens */
+@media (max-width: 768px) {
+  /* Hero section mobile fixes */
+  .hero-section {
+    min-height: 100vh;
+    padding: 120px 0 80px;
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+  }
+  
+  .home-image {
+    width: 250px;
+    height: 300px;
+    order: -1;
+    margin: 0 auto 2rem;
+  }
+
+  .image-container {
+    width: 250px;
+    height: 300px;
+  }
+
+  .main-photo {
+    width: 230px;
+    height: 350px;
+    top: -40px;
+  }
+
+  .side-photo {
+    width: 80px;
+    height: 80px;
+    left: -40px;
+  }
+  
+  .love-animation {
+    left: -50px;
+  }
+  
+  /* Card improvements for mobile */
+  .what-i-do-card {
+    margin-bottom: 3rem; /* More space between cards on mobile */
+  }
+  
+  .what-i-do-section {
+    padding: 100px 0 150px; /* More padding to prevent cramped layout */
+  }
+  
+  /* Footer mobile adjustments */
+  .footer-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .footer-photo-container,
+  .footer-photo-container-scnd {
+    width: 100%;
+    min-height: 40vh;
+  }
+  
+  .footer-description {
+    padding: 3rem 0;
+    transform: none;
+  }
+  
+  .footer-description h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Small Mobile Screens */
+@media (max-width: 576px) {
+  /* Further hero section adjustments */
+  .hero-section {
+    padding: 140px 0 100px; /* Even more top padding for very small screens */
+  }
+  
+  .home-image {
+    width: 200px;
+    height: 250px;
+  }
+
+  .image-container {
+    width: 200px;
+    height: 250px;
+  }
+
+  .main-photo {
+    width: 190px;
+    height: 300px;
+    top: -35px;
+  }
+
+  .side-photo {
+    width: 70px;
+    height: 70px;
+    left: -35px;
+  }
+  
+  /* More card spacing for very small screens */
+  .what-i-do-card {
+    margin-bottom: 3.5rem;
+  }
+  
+  .what-i-do-section {
+    padding: 120px 0 170px;
+  }
+  
+  /* Typography adjustments */
+  .home-description h1 {
+    font-size: 1.8rem;
+  }
+  
+  .home-description h5 {
+    font-size: 1rem;
+  }
+  
+  .footer-description h1 {
+    font-size: 2rem;
+  }
+}
+
+/* Extra Small Screens */
+@media (max-width: 480px) {
+  .hero-section {
+    padding: 160px 0 120px; /* Maximum top padding for navbar clearance */
+  }
+  
+  .what-i-do-card {
+    margin-bottom: 4rem; /* Maximum spacing between cards */
+  }
+  
+  .what-i-do-section {
+    padding: 140px 0 180px;
+  }
+}
+
+/* Landscape mobile orientation fix */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero-section {
+    min-height: 120vh;
+    padding: 80px 0 60px;
+  }
+}
