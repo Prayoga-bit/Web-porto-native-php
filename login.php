@@ -1,13 +1,18 @@
 <?php
 session_start();
 
-// Ambil error dari session (kalau ada)
-$nameErr = $_SESSION['nameErr'] ?? '';
-$usernameErr = $_SESSION['usernameErr'] ?? '';
-$passwordErr = $_SESSION['passwordErr'] ?? '';
-$successMsg = $_SESSION['success'] ?? '';
+// jika sudah login langsung redirect ke index
+if (isset($_SESSION['user_id'])) {
+    header("Location: ../index.php");
+    exit;
+}
 
-unset($_SESSION['nameErr'], $_SESSION['usernameErr'], $_SESSION['passwordErr'], $_SESSION['success']);
+$errors = $_SESSION['error'] ?? [];
+$success = $_SESSION['success'] ?? '';
+$mode = $_SESSION['form_mode'] ?? 'login';
+
+// reset agar pindah form nggak bawa error lama
+unset($_SESSION['error'], $_SESSION['success']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,37 +33,69 @@ unset($_SESSION['nameErr'], $_SESSION['usernameErr'], $_SESSION['passwordErr'], 
             <h2 class="title">Welcome to <br> My Portfolio Website</h2>
             <p class="description">Portfolio website of Prayoga Agus Setiawan in major of <br> information system with nim 2304140072</p>
 
-            <form id="authForm" class="d-flex flex-column row-gap-3" action="process/login_process.php" method="post">
-                <input id="nameField" style="display: none;" class="input-field" type="text" name="fullname" placeholder="Full Name">
-                <span id="nameErr" style="display: none;" class="error"><?php echo htmlspecialchars("$nameErr");?></span>
+            <form id="authForm" class="d-flex flex-column row-gap-3" 
+                action="process/<?= $mode === 'signup' ? 'signup_process.php' : 'login_process.php' ?>" method="post">
 
-                <input class="input-field" type="text" name="username" placeholder="Username">
-                <span class="error"><?php echo htmlspecialchars("$usernameErr");?></span>
+                <!-- Fullname hanya di signup -->
+                <input id="nameField" style="<?= $mode === 'signup' ? '' : 'display:none;' ?>" 
+                    class="input-field" type="text" name="fullname" placeholder="Full Name"
+                    value="<?= htmlspecialchars($_POST['fullname'] ?? '') ?>">
+                <?php if ($mode === 'signup' && isset($errors['fullname'])): ?>
+                    <span class="error"><?= htmlspecialchars($errors['fullname']) ?></span>
+                <?php endif; ?>
 
-                 <div class="password-wrapper" style="position: relative;">
-                    <input id="passwordField" class="input-field" type="password" name="password" placeholder="NIM">
+                <!-- Username -->
+                <input class="input-field" type="text" name="username" placeholder="Username"
+                    value="<?= htmlspecialchars($_COOKIE['username'] ?? ($_POST['username'] ?? '')) ?>">
+                <?php if (isset($errors['username'])): ?>
+                    <span class="error"><?= htmlspecialchars($errors['username']) ?></span>
+                <?php endif; ?>
+
+                <!-- Password -->
+                <div class="password-wrapper" style="position: relative;">
+                    <input id="passwordField" class="input-field" type="password" name="password" placeholder="NIM"
+                        value="<?= htmlspecialchars($_COOKIE['password'] ?? ($_POST['password'] ?? '')) ?>">
                     <i class="fa-solid fa-eye" id="togglePassword"
-                        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
+                    style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
                 </div>
-                <span class="error"><?php echo htmlspecialchars("$passwordErr");?></span>
+                <?php if (isset($errors['password'])): ?>
+                    <span class="error"><?= htmlspecialchars($errors['password']) ?></span>
+                <?php endif; ?>
 
-                <div class="remember" id="rememberField">
-                    <input type="checkbox" id="remember" name="remember">
+                <!-- Remember me hanya di login -->
+                <div class="remember" id="rememberField" style="<?= $mode === 'login' ? '' : 'display:none;' ?>">
+                    <input type="checkbox" id="remember" name="remember" <?= isset($_COOKIE['username']) ? 'checked' : '' ?>>
                     <label for="remember">Remember me</label>
                 </div>
 
-                <button id="formButton" class="button-form" type="submit">Login</button>
+                <!-- General error / success -->
+                <?php if (isset($errors['general'])): ?>
+                    <span class="error"><?= htmlspecialchars($errors['general']) ?></span>
+                <?php endif; ?>
+                <?php if ($success): ?>
+                    <span class="success"><?= htmlspecialchars($success) ?></span>
+                <?php endif; ?>
+
+                <button id="formButton" class="button-form" type="submit">
+                    <?= $mode === 'signup' ? 'Sign Up' : 'Login' ?>
+                </button>
             </form>
 
-            <p class="mt-5 text-center" id="formText" class="form-text">
-                Doesn't have an account? 
-                <a href="#" onclick="toggleForm('signup', event)">Sign up</a>
+            <p class="mt-5 text-center"  id="formText">
+                <?php if ($mode === 'signup'): ?>
+                    Already have an account? <a href="#" onclick="toggleForm('login', event)">Login</a>
+                <?php else: ?>
+                    Doesn't have an account? <a href="#" onclick="toggleForm('signup', event)">Sign up</a>
+                <?php endif; ?>
             </p>
 
         </div>
 
         <div class="slider-wrapper">
             <div class="slider">
+                <img src="img/karina-prada.jpg" alt="Karina Aespa">
+                <img src="img/mykisah-karina.jpeg" alt="Karina Aespa">
+                <img src="img/karina-cakep.jpg" alt="Karina Aespa">
                 <img src="img/karina aespa.jpg" alt="Karina Aespa">
                 <img src="img/karina.jpg" alt="Karina Aespa">
             </div>

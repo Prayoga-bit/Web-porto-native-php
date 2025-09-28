@@ -84,6 +84,11 @@ input::placeholder {
     color: var(--light-color);
 }
 
+.error {
+    color: rgb(196, 3, 3);
+    font-weight: 500;
+}
+
 .remember {
     display: flex;
     align-items: center;
