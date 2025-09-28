@@ -119,11 +119,8 @@ try {
     <link rel="stylesheet" href="css/settings.css">
 </head>
 <body>
-    <?php 
-        $user_id = $_SESSION['user_id'];
-        include "components/header.php"; 
-    ?>
-    <div class="container">
+    <?php include "components/header.php"; ?>
+    <div class="container settings-container">
         <div class="row g-4">
             <!-- Sidebar -->
             <div class="col-lg-3">

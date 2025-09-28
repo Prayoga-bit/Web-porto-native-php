@@ -17,7 +17,7 @@
 }
 
 body {
-  background-color: var(--light-color);
+  background-color: var(--primary-color);
 }
 
 /* Navbar Styling */
@@ -64,36 +64,41 @@ body {
   width: 80%;
 }
 
-
 .container {
     max-width: 1200px;
-    margin-top: 2rem;
+}
+
+.settings-container {
+    padding: 100px 0;
 }
 
 .profile-sidebar {
-    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+    height: 75vh;
+    background: var(--light-color);
     border-radius: 20px;
+    border: 3px solid var(--secondary-color);
     padding: 2rem;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
 .profile-main {
-    background: white;
+    height: 75vh;
+    background: var(--light-color);
     border-radius: 20px;
     padding: 2rem;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    border: 2px solid #ff9a9e;
+    border: 3px solid var(--secondary-color);
 }
 
 .sidebar-item {
     display: flex;
     align-items: center;
     padding: 1rem;
-    color: white;
+    color: var(--dark-color);
     text-decoration: none;
     border-radius: 10px;
     margin-bottom: 0.5rem;
-    background: rgba(255,255,255,0.2);
+    background: var(--light-color);
     backdrop-filter: blur(10px);
 }
 
@@ -103,7 +108,8 @@ body {
 }
 
 .sidebar-item.active {
-    background: rgba(255,255,255,0.3);
+    background: var(--secondary-color);
+    color: var(--light-color);
     font-weight: 600;
 }
 
@@ -123,7 +129,7 @@ body {
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid #ff9a9e;
+    border: 2px solid var(--secondary-color);
     margin-bottom: 1rem;
     background: #f8f9fa;
 }
@@ -132,12 +138,12 @@ body {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+    background: var(--secondary-color);
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 1rem;
-    border: 4px solid #ff9a9e;
+    border: 4px solid var(--accent-color);
 }
 
 .avatar-placeholder i {
@@ -164,7 +170,7 @@ body {
 }
 
 .btn-update {
-    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+    background: var(--secondary-color);
     border: none;
     border-radius: 10px;
     padding: 0.75rem 2rem;
@@ -176,13 +182,13 @@ body {
 .btn-update:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(255, 154, 158, 0.4);
-    color: white;
+    color: var(--secondary-color);
 }
 
 .input-group-text {
-    background: #ff9a9e;
-    color: white;
-    border: 2px solid #ff9a9e;
+    background: var(--secondary-color);
+    color: var(--light-color);
+    border: 2px solid var(--accent-color);
     border-radius: 10px 0 0 10px;
 }
 
@@ -212,7 +218,7 @@ body {
 .file-input-label {
     display: inline-block;
     padding: 0.5rem 1rem;
-    background: #ff9a9e;
+    background: var(--secondary-color);
     color: white;
     border-radius: 10px;
     cursor: pointer;
@@ -222,4 +228,10 @@ body {
 .file-input-label:hover {
     background: #ff8a8e;
     transform: translateY(-1px);
+}
+
+@media (max-width: 992px) {
+    .profile-sidebar, .profile-main {
+        height: auto;
+    }
 }

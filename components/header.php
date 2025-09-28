@@ -1,18 +1,25 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+require_once __DIR__ . '/../config/conn.php';
+
 $username = $_SESSION['username'] ?? 'Guest';
+$nama_lengkap = $_SESSION['nama_lengkap'] ?? '';
 $photo = null;
 
-if (isset($user_id)) {
-    $stmt = $conn->prepare("SELECT username, photo FROM users WHERE id = ?");
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $stmt->bind_result($db_username, $db_photo);
-    if ($stmt->fetch()) {
-        $username = $db_username;
-        $photo = $db_photo; // simpan path foto, misal 'uploads/user1.jpg'
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+
+    $stmt = $pdo->prepare("SELECT username, nama_lengkap, foto FROM users WHERE id = ?");
+    $stmt->execute([$user_id]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user) {
+        $username = $user['username'];
+        $nama_lengkap = $user['nama_lengkap'];
+        $photo = $user['foto'];
     }
-    $stmt->close();
 }
 ?>
 
@@ -28,7 +35,7 @@ if (isset($user_id)) {
     <!-- Nav Links + Profile -->
     <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
       <!-- Brand -->
-      <a class="navbar-brand" href="#">Yoojimin</a>
+      <a class="navbar-brand" href="index.php">Yoojimin</a>
 
       <!-- Nav Links -->
       <ul class="navbar-nav mx-auto">
@@ -42,8 +49,10 @@ if (isset($user_id)) {
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
             <!-- Foto user atau icon default -->
-            <?php if ($photo && file_exists($photo)): ?>
-              <img src="<?php echo htmlspecialchars($photo); ?>" alt="profile" class="rounded-circle" style="width: 30px; height: 30px; object-fit: cover; margin-right: 8px;">
+            <?php if ($photo): ?>
+              <img src="uploads/<?php echo htmlspecialchars($photo); ?>" alt="profile"
+                  class="rounded-circle"
+                  style="width: 45px; height: 45px; object-fit: cover; margin-right: 8px;">
             <?php else: ?>
               <i class="fa-solid fa-user me-2"></i>
             <?php endif; ?>
